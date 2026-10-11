@@ -17,7 +17,6 @@ class GameMenu:
         self.high_score_num_text = self.font.render(str(self.hscore), True, st.WHITE)
 
     def draw(self, level_num_, score_): # Вывод статистики игрока
-        self.score = score_
         self.name = self.font.render(self.username, True, st.WHITE)
         self.level_num_text = self.font.render(str(level_num_), True, st.WHITE)
         self.score_num_text = self.font.render(str(score_), True, st.WHITE)

@@ -220,12 +220,15 @@ class Game:
 
                 # Draw a solid blue circle in the center
                 #pygame.draw.rect(screen, st.GREEN, pygame.Rect(pos_x, pos_y, 135, 22))
-                self.racket.draw(self.pos_x, self.pos_y, rocket_width_)
-                # Нарисуем шарик
-                ball_status, score, self.bonus_list = self.ball.draw(self.racket, self.bonus_list, self.level_bricks, self.racket_eng)
+                self.racket.set_rect(self.pos_x, self.pos_y, rocket_width_, st.RACKET_H)
+                self.racket.draw()
+                # Движение шарика
+                ball_status, score, self.bonus_list = self.ball.move(self.racket, self.bonus_list, self.level_bricks, self.racket_eng)
                 self.game_menu.set_score(score)
                 if ball_status == 0:
                     self.f_run = 'LOST'
+                else:
+                    self.ball.draw()
                 if is_level_win(self.level_bricks):
                     self.f_run = 'WIN'
                     self.score = self.game_menu.get_score()

@@ -9,11 +9,12 @@ class Brick():
         self.disp = display_
         self.x_pos = 0
         self.y_pos = 0
-        self.brick_rect = pygame.Rect((self.x_pos * (st.BRICK_W + 4) + 2, self.y_pos * (st.BRICK_H + 4) + 2, st.BRICK_W, st.BRICK_H))
+        self.brick_rect = brick_rect_by_pos(self.x_pos, self.y_pos, st.BRICK_W, st.BRICK_H)
 
     def set_pos(self, x_, y_):
         self.x_pos = x_
         self.y_pos = y_
+        self.brick_rect = brick_rect_by_pos(self.x_pos, self.y_pos, st.BRICK_W, st.BRICK_H)
 
     def set_color(self, color_):
         self.color = color_
@@ -22,7 +23,6 @@ class Brick():
         self.strong = strong_
 
     def draw(self):
-        self.brick_rect = pygame.Rect((self.x_pos * (st.BRICK_W + 4) + 2, self.y_pos * (st.BRICK_H + 4) + 2, st.BRICK_W, st.BRICK_H))
         pygame.draw.rect(screen, self.color, self.brick_rect)
 
     def get_rect(self):
@@ -39,6 +39,11 @@ class Brick():
     # Изменить цвет
     def get_color(self):
         return self.color
+
+
+# Прямоугольник кирпича по его месту в сетке уровня
+def brick_rect_by_pos(x_pos_, y_pos_, w_, h_):
+    return pygame.Rect((x_pos_ * (w_ + 4) + 2, y_pos_ * (h_ + 4) + 2, w_, h_))
 
 
 # Создание кирпича по коду из файла уровня

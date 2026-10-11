@@ -16,8 +16,9 @@ class Ball():
         self.dx = -1
         self.dy = -1
 
+    # Движение мячика на один кадр
     # Возвращает: 0 - мячик упал / 1, очки за кадр, новый список бонусов
-    def draw(self, racket_, bonus_list, level_bricks, racket_eng):
+    def move(self, racket_, bonus_list, level_bricks, racket_eng):
         old_x = self.ball.x
         self.ball = move_ball(self.ball, self.ball_speed, self.dx, self.dy)
         if is_ball_lost(self.ball):
@@ -48,8 +49,10 @@ class Ball():
             self.dy = -self.dy
         # Условие отражения c рокеткой
         self.dx, self.dy = bounce_racket(self.ball, old_x, self.dx, self.dy, racket_.get_rect(), racket_eng)
-        pygame.draw.circle(screen, pygame.Color('white'), self.ball.center, self.ball_radius)
         return 1, score, bonus_list
+
+    def draw(self):
+        pygame.draw.circle(screen, pygame.Color('white'), self.ball.center, self.ball_radius)
 
 
 # Сдвиг мячика на один кадр, возвращает новый прямоугольник

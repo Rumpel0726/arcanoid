@@ -5,8 +5,8 @@ class Racket:
     def __init__(self):
         self.racket = pygame.Rect(0, 0, st.RACKET_W, st.RACKET_H)
 
-    def draw(self, x_, y_, w_):
-        pygame.draw.rect(screen, st.GREEN, self.set_rect(x_, y_, w_, st.RACKET_H))
+    def draw(self):
+        pygame.draw.rect(screen, st.GREEN, self.racket)
 
     def set_rect(self, x_, y_, w_, h_):
         self.racket.x = x_
