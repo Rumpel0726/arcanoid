@@ -41,6 +41,22 @@ def choose_bonus_type(brick_, rnd1_, rnd2_):
     return ''
 
 
+# Рокетка поймала бонус
+def is_bonus_caught(racket_rect_, bonus_):
+    return bonus_.visible == 1 and racket_rect_.colliderect(bonus_.get_rect())
+
+
+# Действие бонуса: новая ширина рокетки, центральная зона и прохождение мячика сквозь кирпичи
+def apply_bonus(bonus_type_, width_, eng_, no_colis_):
+    if bonus_type_ == "plus":
+        return width_ + 10, eng_ + 5, no_colis_
+    elif bonus_type_ == "minus":
+        return width_ - 10, eng_ - 5, no_colis_
+    elif bonus_type_ == "circle":
+        return width_, eng_, True
+    return width_, eng_, no_colis_
+
+
 # Создание бонуса
 def make_bonus(bonus_type_, x_, y_):
     bonus = Bonus()

@@ -17,3 +17,13 @@ class Racket:
 
     def get_rect(self):
         return self.racket
+
+
+# Новая позиция рокетки по нажатым стрелкам
+def move_racket(pos_x_, left_, right_, speed_, width_, field_w_):
+    new_x = pos_x_
+    if left_ and new_x > 0:
+        new_x -= speed_
+    if right_ and new_x < field_w_ - width_:
+        new_x += speed_
+    return new_x

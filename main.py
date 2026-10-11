@@ -1,5 +1,6 @@
 from init_glob_vars import *
-from Racket import Racket
+from Racket import Racket, move_racket
+from Bonus import is_bonus_caught, apply_bonus
 from Ball import Ball
 from Brick import Brick
 from Level import Level, is_level_win, load_levels, make_level_bricks
@@ -213,12 +214,8 @@ class Game:
                 self.score = self.game_menu.get_score()
                 self.game_menu.draw(self.level_num + 1, self.score)
 
-                if keys[pygame.K_LEFT]: # Передвижение рокетки влево
-                    if self.pos_x > 0:
-                        self.pos_x -= st.RACKET_SPEED
-                if keys[pygame.K_RIGHT]: # Передвижение рокетки вправо
-                    if self.pos_x < st.DEFINITION[0] - rocket_width_:
-                        self.pos_x += st.RACKET_SPEED
+                # Передвижение рокетки
+                self.pos_x = move_racket(self.pos_x, keys[pygame.K_LEFT], keys[pygame.K_RIGHT], st.RACKET_SPEED, rocket_width_, st.DEFINITION[0])
 
 
                 # Draw a solid blue circle in the center
@@ -235,17 +232,9 @@ class Game:
                 self.level.draw(self.level_bricks)
                 for i in range(len(self.bonus_list)): # проверка косания с бонусом
                     self.bonus_list[i].draw()
-                    if self.racket.get_rect().colliderect(self.bonus_list[i].get_rect()):
-                        if self.bonus_list[i].visible == 1:
-                            self.bonus_list[i].visible = 0
-                            if self.bonus_list[i].bonus_type == "plus":
-                                rocket_width_ += 10
-                                self.racket_eng += 5
-                            elif self.bonus_list[i].bonus_type == "minus":
-                                rocket_width_ -= 10
-                                self.racket_eng -= 5
-                            elif self.bonus_list[i].bonus_type == "circle":
-                                self.ball.no_colis = True
+                    if is_bonus_caught(self.racket.get_rect(), self.bonus_list[i]):
+                        self.bonus_list[i].visible = 0
+                        rocket_width_, self.racket_eng, self.ball.no_colis = apply_bonus(self.bonus_list[i].bonus_type, rocket_width_, self.racket_eng, self.ball.no_colis)
                 if self.score > self.game_menu.hscore:
                     self.game_menu.hscore = self.score
                     self.db.set_hscore(self.user_name, self.game_menu.hscore)
