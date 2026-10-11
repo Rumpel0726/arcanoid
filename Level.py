@@ -15,14 +15,16 @@ class Level():
             #print(level_bricks[i].get_visible)
 
     # Заполним массив кирпичами
-    def fill_level(self, level_bricks, l_num):
+    def fill_level(self, l_num):
         self.level = ast.literal_eval(self.levels[l_num])
+        level_bricks = []
         # Заполним массив кирпичами
         for i in range(len(self.level)):
             for j in range(len(self.level[i])):
                 # Заполним массив кирпичами если не равно 0
                 if self.level[i][j] != 0:
                     level_bricks.append(make_brick(self.level[i][j], j, i))
+        return level_bricks
 
 
 # Количество целых кирпичей

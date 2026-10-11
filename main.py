@@ -37,8 +37,7 @@ class Game:
         self.level_num = 0
         self.user_name = ''
         self.db = DB()
-        self.level_bricks = []
-        self.level.fill_level(self.level_bricks, self.level_num)
+        self.level_bricks = self.level.fill_level(self.level_num)
         self.brick = Brick()
         self.game_menu = GameMenu(self.level_num + 1, self.score)
         self.lose_menu = LoseMenu()
@@ -61,8 +60,7 @@ class Game:
         self.racket = Racket()
         self.ball = Ball()
         self.level = Level()
-        self.level_bricks = []
-        self.level.fill_level(self.level_bricks, self.level_num)
+        self.level_bricks = self.level.fill_level(self.level_num)
         self.brick = Brick()
         self.game_menu = GameMenu(self.level_num + 1, self.score)
         self.game_menu.hscore = self.start_hscore
@@ -157,8 +155,7 @@ class Game:
                 self.menu_status = self.main_menu.button_click(self.mouse_click_pos)
                 self.level_num = 0
                 self.score = 0
-                self.level_bricks = []
-                self.level.fill_level(self.level_bricks, self.level_num)
+                self.level_bricks = self.level.fill_level(self.level_num)
                 self.game_menu.score = 0
                 if self.menu_status == 'PLAY_B':
                     self.f_run = 'GAME'
