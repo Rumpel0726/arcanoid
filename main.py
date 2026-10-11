@@ -2,7 +2,7 @@ from init_glob_vars import *
 from Racket import Racket
 from Ball import Ball
 from Brick import Brick
-from Level import Level
+from Level import Level, is_level_win
 from MainMenu import MainMenu
 from GameMenu import GameMenu
 from RegisterMenu import RegisterMenu
@@ -229,7 +229,7 @@ class Game:
                 # Нарисуем шарик
                 if self.ball.draw(self.racket, self.bonus_list, self.game_menu, self.f_run, self.level_bricks, self.racket_eng) == 0:
                     self.f_run = 'LOST'
-                if self.level.get_brick_count(self.level_bricks) < 10:
+                if is_level_win(self.level_bricks):
                     self.f_run = 'WIN'
                     self.score = self.game_menu.get_score()
                 self.level.draw(self.level_bricks)

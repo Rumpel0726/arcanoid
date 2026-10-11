@@ -39,3 +39,14 @@ class Brick():
     # Изменить цвет
     def get_color(self):
         return self.color
+
+
+# Очки за разбитый кирпич
+def brick_score(brick_):
+    if brick_.bonus == 0:
+        return 10
+    elif brick_.bonus == 1:
+        return 20
+    elif brick_.bonus == 2:
+        return 40
+    return 0

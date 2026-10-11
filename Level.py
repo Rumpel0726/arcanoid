@@ -6,7 +6,6 @@ class Level():
     def __init__(self):
         self.levels = open('data/levels.txt').readlines()
         self.level = ast.literal_eval(self.levels[0])
-        self.cnt_brick = 0
 
     def draw(self, level_bricks):
         self.level = ast.literal_eval(self.levels[0])
@@ -40,9 +39,17 @@ class Level():
                     brick.set_pos(j, i)
                     level_bricks.append(brick)
 
-    def get_brick_count(self, level_bricks):
-        self.cnt_brick = 0
-        for i in level_bricks:
-            if i.disp == 1:
-                self.cnt_brick += 1
-        return self.cnt_brick
+
+
+# Количество целых кирпичей
+def count_visible_bricks(level_bricks):
+    cnt_brick = 0
+    for i in level_bricks:
+        if i.disp == 1:
+            cnt_brick += 1
+    return cnt_brick
+
+
+# Уровень пройден, если осталось меньше 10 кирпичей
+def is_level_win(level_bricks):
+    return count_visible_bricks(level_bricks) < 10

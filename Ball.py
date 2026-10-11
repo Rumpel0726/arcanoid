@@ -1,6 +1,7 @@
 from init_glob_vars import *
 import random as rn
 from Bonus import Bonus
+from Brick import brick_score
 
 
 # Класс - мячик
@@ -28,12 +29,7 @@ class Ball():
                     self.dy = -self.dy
                 if level_bricks[i].get_color() == st.RED:
                     level_bricks[i].set_unvisible()
-                    if level_bricks[i].bonus == 0:
-                        game_menu.set_score(10)
-                    elif level_bricks[i].bonus == 1:
-                        game_menu.set_score(20)
-                    elif level_bricks[i].bonus == 2:
-                        game_menu.set_score(40)
+                    game_menu.set_score(brick_score(level_bricks[i]))
                     # Создание бонуса
                     if level_bricks[i].bonus == 1:
                         bonus = Bonus()
