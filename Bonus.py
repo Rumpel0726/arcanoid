@@ -17,12 +17,26 @@ class Bonus():
                 screen.blit(bonus_minus, (self.x_pos, self.y_pos))
             elif self.bonus_type == "circle":
                 screen.blit(bonus_circle, (self.x_pos, self.y_pos))
-            self.y_pos += st.BONUS_SPEED
-            if self.y_pos == st.HEIGHT:
+
+    # Падение бонуса на один кадр
+    def move(self):
+        if self.visible == 1:
+            self.y_pos = fall_bonus(self.y_pos, st.BONUS_SPEED)
+            if is_bonus_out(self.y_pos, st.HEIGHT):
                 self.visible = 0
 
     def get_rect(self):
         return pygame.Rect(self.x_pos, self.y_pos, 35, 35)
+
+
+# Новая позиция бонуса по Y
+def fall_bonus(y_pos_, speed_):
+    return y_pos_ + speed_
+
+
+# Бонус долетел до края
+def is_bonus_out(y_pos_, field_h_):
+    return y_pos_ == field_h_
 
 
 # Тип бонуса из разбитого кирпича, '' - бонуса нет

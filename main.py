@@ -232,6 +232,7 @@ class Game:
                 self.level.draw(self.level_bricks)
                 for i in range(len(self.bonus_list)): # проверка косания с бонусом
                     self.bonus_list[i].draw()
+                    self.bonus_list[i].move()
                     if is_bonus_caught(self.racket.get_rect(), self.bonus_list[i]):
                         self.bonus_list[i].visible = 0
                         rocket_width_, self.racket_eng, self.ball.no_colis = apply_bonus(self.bonus_list[i].bonus_type, rocket_width_, self.racket_eng, self.ball.no_colis)
