@@ -1,0 +1,17 @@
+# Виртуальные окружения
+venv/
+venv_old_py39/
+
+# IDE
+.idea/
+
+# Кэш Python
+__pycache__/
+*.pyc
+
+# Сборка PyInstaller
+build/
+dist/
+
+# Старая база SQLite (больше не используется)
+*.db
