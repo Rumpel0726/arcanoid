@@ -2,7 +2,7 @@ from init_glob_vars import *
 from Racket import Racket
 from Ball import Ball
 from Brick import Brick
-from Level import Level, is_level_win
+from Level import Level, is_level_win, load_levels, make_level_bricks
 from MainMenu import MainMenu
 from GameMenu import GameMenu
 from RegisterMenu import RegisterMenu
@@ -21,7 +21,8 @@ class Game:
     pos_x = 500
     pos_y = 650
 
-    def __init__(self):
+    def __init__(self, levels_):
+        self.levels = levels_
         self.racket = Racket()
         self.ball = Ball()
         self.level = Level()
@@ -37,7 +38,7 @@ class Game:
         self.level_num = 0
         self.user_name = ''
         self.db = DB()
-        self.level_bricks = self.level.fill_level(self.level_num)
+        self.level_bricks = make_level_bricks(self.levels[self.level_num])
         self.brick = Brick()
         self.game_menu = GameMenu(self.level_num + 1, self.score)
         self.lose_menu = LoseMenu()
@@ -60,7 +61,7 @@ class Game:
         self.racket = Racket()
         self.ball = Ball()
         self.level = Level()
-        self.level_bricks = self.level.fill_level(self.level_num)
+        self.level_bricks = make_level_bricks(self.levels[self.level_num])
         self.brick = Brick()
         self.game_menu = GameMenu(self.level_num + 1, self.score)
         self.game_menu.hscore = self.start_hscore
@@ -155,7 +156,7 @@ class Game:
                 self.menu_status = self.main_menu.button_click(self.mouse_click_pos)
                 self.level_num = 0
                 self.score = 0
-                self.level_bricks = self.level.fill_level(self.level_num)
+                self.level_bricks = make_level_bricks(self.levels[self.level_num])
                 self.game_menu.score = 0
                 if self.menu_status == 'PLAY_B':
                     self.f_run = 'GAME'
@@ -254,7 +255,8 @@ class Game:
 
 
 def start_game():
-    game = Game()
+    levels = load_levels('data/levels.txt')
+    game = Game(levels)
     game.start(gl_rocket_width)
     pygame.quit()
 

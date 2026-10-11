@@ -3,28 +3,36 @@ from Brick import make_brick
 
 
 class Level():
-    def __init__(self):
-        self.levels = open('data/levels.txt').readlines()
-        self.level = ast.literal_eval(self.levels[0])
-
     def draw(self, level_bricks):
-        self.level = ast.literal_eval(self.levels[0])
         for i in range(len(level_bricks)):
             if level_bricks[i].get_visible() == 1:
                 level_bricks[i].draw()
             #print(level_bricks[i].get_visible)
 
-    # Заполним массив кирпичами
-    def fill_level(self, l_num):
-        self.level = ast.literal_eval(self.levels[l_num])
-        level_bricks = []
-        # Заполним массив кирпичами
-        for i in range(len(self.level)):
-            for j in range(len(self.level[i])):
-                # Заполним массив кирпичами если не равно 0
-                if self.level[i][j] != 0:
-                    level_bricks.append(make_brick(self.level[i][j], j, i))
-        return level_bricks
+
+# Чтение уровней из файла (один раз при запуске)
+def load_levels(file_name_):
+    lines = open(file_name_).readlines()
+    levels = []
+    for i in range(len(lines)):
+        levels.append(parse_level(lines[i]))
+    return levels
+
+
+# Строка из файла -> матрица кодов кирпичей
+def parse_level(line_):
+    return ast.literal_eval(line_)
+
+
+# Заполним массив кирпичами по матрице уровня
+def make_level_bricks(level_):
+    level_bricks = []
+    for i in range(len(level_)):
+        for j in range(len(level_[i])):
+            # Заполним массив кирпичами если не равно 0
+            if level_[i][j] != 0:
+                level_bricks.append(make_brick(level_[i][j], j, i))
+    return level_bricks
 
 
 # Количество целых кирпичей
