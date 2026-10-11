@@ -14,13 +14,11 @@ class Ball():
         self.no_colis = False
         self.dx = -1
         self.dy = -1
-        self.old_x = 0
 
     def draw(self, rocket_rect, bonus_list, game_menu, f_run, level_bricks, racket_eng):
-        self.old_x = self.ball.x
-        self.ball.x += self.ball_speed * self.dx
-        self.ball.y += self.ball_speed * self.dy
-        if self.ball.y > 720:
+        old_x = self.ball.x
+        self.ball = move_ball(self.ball, self.ball_speed, self.dx, self.dy)
+        if is_ball_lost(self.ball):
             return 0
         # Условие отражения с кирпичем
         for i in range(len(level_bricks)):
@@ -52,27 +50,52 @@ class Ball():
 
 
         # Условие отражения с правой и левой стеной
-        if self.ball.centerx < self.ball_radius or self.ball.centerx > st.HEIGHT - self.ball_radius:
-            self.dx = -self.dx
+        self.dx = bounce_side_wall(self.ball, self.ball_radius, st.HEIGHT, self.dx)
         # Условие отражения с верхней стеной
-        if self.ball.centery < self.ball_radius:
+        if is_top_wall_hit(self.ball, self.ball_radius):
             self.no_colis = False
             self.dy = -self.dy
         # Условие отражения c рокеткой
-        if rocket_rect.get_rect().y > 600:
-            if self.ball.colliderect(rocket_rect.get_rect()) and self.dy > 0:
-                #print(racket_eng)
-
-                if self.ball.x > rocket_rect.get_rect().x+(rocket_rect.get_rect().width/2) + racket_eng:
-                    self.dy = -self.dy
-                    if self.old_x > self.ball.x:
-                        self.dx = -self.dx
-                else:
-                    if self.ball.x < rocket_rect.get_rect().x+(rocket_rect.get_rect().width/2) - racket_eng:
-                        self.dy = -self.dy
-                        if self.old_x < self.ball.x:
-                            self.dx = -self.dx
-                    else:
-                        self.dy = -self.dy
+        self.dx, self.dy = bounce_racket(self.ball, old_x, self.dx, self.dy, rocket_rect.get_rect(), racket_eng)
         pygame.draw.circle(screen, pygame.Color('white'), self.ball.center, self.ball_radius)
         return 1
+
+
+# Сдвиг мячика на один кадр, возвращает новый прямоугольник
+def move_ball(ball_, speed_, dx_, dy_):
+    new_ball = ball_.copy()
+    new_ball.x += speed_ * dx_
+    new_ball.y += speed_ * dy_
+    return new_ball
+
+
+# Мячик упал ниже экрана
+def is_ball_lost(ball_):
+    return ball_.y > 720
+
+
+# Отражение от правой и левой стены
+def bounce_side_wall(ball_, radius_, field_w_, dx_):
+    if ball_.centerx < radius_ or ball_.centerx > field_w_ - radius_:
+        return -dx_
+    return dx_
+
+
+# Мячик долетел до верхней стены
+def is_top_wall_hit(ball_, radius_):
+    return ball_.centery < radius_
+
+
+# Отражение от рокетки
+# Если мячик попал в край рокетки и летит к этому краю, то меняется и направление по X
+def bounce_racket(ball_, old_x_, dx_, dy_, racket_rect_, racket_eng_):
+    if racket_rect_.y > 600 and ball_.colliderect(racket_rect_) and dy_ > 0:
+        racket_center = racket_rect_.x + racket_rect_.width / 2
+        if ball_.x > racket_center + racket_eng_: # правый край
+            if old_x_ > ball_.x:
+                dx_ = -dx_
+        elif ball_.x < racket_center - racket_eng_: # левый край
+            if old_x_ < ball_.x:
+                dx_ = -dx_
+        dy_ = -dy_
+    return dx_, dy_
