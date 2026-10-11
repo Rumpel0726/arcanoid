@@ -25,6 +25,22 @@ class Bonus():
         return pygame.Rect(self.x_pos, self.y_pos, 35, 35)
 
 
+# Тип бонуса из разбитого кирпича, '' - бонуса нет
+# rnd1_ и rnd2_ - случайные числа 0 или 1
+def choose_bonus_type(brick_, rnd1_, rnd2_):
+    if brick_.bonus == 1:
+        if rnd1_ == 0:
+            return "plus"
+        elif rnd2_ == 1:
+            return "minus"
+        return "plus"
+    elif brick_.bonus == 2:
+        return "plus"
+    elif brick_.bonus == 3:
+        return "circle"
+    return ''
+
+
 # Создание бонуса
 def make_bonus(bonus_type_, x_, y_):
     bonus = Bonus()

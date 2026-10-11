@@ -55,6 +55,19 @@ def make_brick(code_, x_, y_):
     return brick
 
 
+# Цвет кирпича после удара, None - кирпич разбит
+def next_brick_color(color_):
+    if color_ == st.RED:
+        return None
+    elif color_ == st.YELLOW:
+        return st.RED
+    elif color_ == st.ORANGE:
+        return st.YELLOW
+    elif color_ == st.BLUE:
+        return st.YELLOW
+    return color_
+
+
 # Очки за разбитый кирпич
 def brick_score(brick_):
     if brick_.bonus == 0:

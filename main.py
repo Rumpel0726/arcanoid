@@ -225,7 +225,9 @@ class Game:
                 #pygame.draw.rect(screen, st.GREEN, pygame.Rect(pos_x, pos_y, 135, 22))
                 self.racket.draw(self.pos_x, self.pos_y, rocket_width_)
                 # Нарисуем шарик
-                if self.ball.draw(self.racket, self.bonus_list, self.game_menu, self.f_run, self.level_bricks, self.racket_eng) == 0:
+                ball_status, score, self.bonus_list = self.ball.draw(self.racket, self.bonus_list, self.level_bricks, self.racket_eng)
+                self.game_menu.set_score(score)
+                if ball_status == 0:
                     self.f_run = 'LOST'
                 if is_level_win(self.level_bricks):
                     self.f_run = 'WIN'

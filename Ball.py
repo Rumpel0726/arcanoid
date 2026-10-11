@@ -1,7 +1,8 @@
 from init_glob_vars import *
 import random as rn
-from Bonus import make_bonus
-from Brick import brick_score
+from Bonus import make_bonus, choose_bonus_type
+from Brick import brick_score, next_brick_color
+from lists import add_element_last
 
 
 # Класс - мячик
@@ -15,39 +16,29 @@ class Ball():
         self.dx = -1
         self.dy = -1
 
-    def draw(self, rocket_rect, bonus_list, game_menu, f_run, level_bricks, racket_eng):
+    # Возвращает: 0 - мячик упал / 1, очки за кадр, новый список бонусов
+    def draw(self, racket_, bonus_list, level_bricks, racket_eng):
         old_x = self.ball.x
         self.ball = move_ball(self.ball, self.ball_speed, self.dx, self.dy)
         if is_ball_lost(self.ball):
-            return 0
+            return 0, 0, bonus_list
+        score = 0
         # Условие отражения с кирпичем
         for i in range(len(level_bricks)):
-            if self.ball.colliderect(level_bricks[i].get_rect()) and level_bricks[i].get_visible() == 1 and (self.dy > 0 or self.dy < 0 or self.dx > 0 or self.dx < 0):
+            if self.ball.colliderect(level_bricks[i].get_rect()) and level_bricks[i].get_visible() == 1:
                 if not self.no_colis:
                     self.dy = -self.dy
-                if level_bricks[i].get_color() == st.RED:
+                new_color = next_brick_color(level_bricks[i].get_color())
+                if new_color is None: # кирпич разбит
                     level_bricks[i].set_unvisible()
-                    game_menu.set_score(brick_score(level_bricks[i]))
+                    score += brick_score(level_bricks[i])
                     # Создание бонуса
-                    brick_rect = level_bricks[i].get_rect()
-                    if level_bricks[i].bonus == 1:
-                        bonus_type = "plus"
-                        if rn.randint(0, 1) == 0:
-                            bonus_type = "plus"
-                        elif rn.randint(0, 1) == 1:
-                            bonus_type = "minus"
-                        bonus_list.append(make_bonus(bonus_type, brick_rect.x, brick_rect.y))
-                    elif level_bricks[i].bonus == 2:
-                        bonus_list.append(make_bonus("plus", brick_rect.x, brick_rect.y))
-                    elif level_bricks[i].bonus == 3:
-                        bonus_list.append(make_bonus("circle", brick_rect.x, brick_rect.y))
-                elif level_bricks[i].get_color() == st.YELLOW:
-                    level_bricks[i].set_color(st.RED)
-                elif level_bricks[i].get_color() == st.ORANGE:
-                    level_bricks[i].set_color(st.YELLOW)
-                elif level_bricks[i].get_color() == st.BLUE:
-                    level_bricks[i].set_color(st.YELLOW)
-
+                    bonus_type = choose_bonus_type(level_bricks[i], rn.randint(0, 1), rn.randint(0, 1))
+                    if bonus_type != '':
+                        brick_rect = level_bricks[i].get_rect()
+                        bonus_list = add_element_last(bonus_list, make_bonus(bonus_type, brick_rect.x, brick_rect.y))
+                else:
+                    level_bricks[i].set_color(new_color)
 
         # Условие отражения с правой и левой стеной
         self.dx = bounce_side_wall(self.ball, self.ball_radius, st.HEIGHT, self.dx)
@@ -56,9 +47,9 @@ class Ball():
             self.no_colis = False
             self.dy = -self.dy
         # Условие отражения c рокеткой
-        self.dx, self.dy = bounce_racket(self.ball, old_x, self.dx, self.dy, rocket_rect.get_rect(), racket_eng)
+        self.dx, self.dy = bounce_racket(self.ball, old_x, self.dx, self.dy, racket_.get_rect(), racket_eng)
         pygame.draw.circle(screen, pygame.Color('white'), self.ball.center, self.ball_radius)
-        return 1
+        return 1, score, bonus_list
 
 
 # Сдвиг мячика на один кадр, возвращает новый прямоугольник
