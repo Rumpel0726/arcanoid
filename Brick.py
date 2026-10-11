@@ -41,6 +41,20 @@ class Brick():
         return self.color
 
 
+# Создание кирпича по коду из файла уровня
+def make_brick(code_, x_, y_):
+    if code_ == 2:
+        brick = Brick(st.YELLOW, 1, 2)
+    elif code_ == 3:
+        brick = Brick(st.ORANGE, 2)
+    elif code_ == 4:
+        brick = Brick(st.BLUE, 3)
+    else:
+        brick = Brick(st.RED)
+    brick.set_pos(x_, y_)
+    return brick
+
+
 # Очки за разбитый кирпич
 def brick_score(brick_):
     if brick_.bonus == 0:

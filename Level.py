@@ -1,5 +1,5 @@
 from init_glob_vars import *
-from Brick import Brick
+from Brick import make_brick
 
 
 class Level():
@@ -22,23 +22,7 @@ class Level():
             for j in range(len(self.level[i])):
                 # Заполним массив кирпичами если не равно 0
                 if self.level[i][j] != 0:
-                    brick = Brick()
-                    if self.level[i][j] == 1:
-                        brick.set_color(st.RED)
-                        brick.set_strong(1)
-                    if self.level[i][j] == 2:
-                        brick.set_color(st.YELLOW)
-                        brick.set_strong(2)
-                        brick.bonus = 1
-                    if self.level[i][j] == 3:
-                        brick.set_color(st.ORANGE)
-                        brick.bonus = 2
-                    if self.level[i][j] == 4:
-                        brick.set_color(st.BLUE)
-                        brick.bonus = 3
-                    brick.set_pos(j, i)
-                    level_bricks.append(brick)
-
+                    level_bricks.append(make_brick(self.level[i][j], j, i))
 
 
 # Количество целых кирпичей

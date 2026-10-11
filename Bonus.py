@@ -23,3 +23,13 @@ class Bonus():
 
     def get_rect(self):
         return pygame.Rect(self.x_pos, self.y_pos, 35, 35)
+
+
+# Создание бонуса
+def make_bonus(bonus_type_, x_, y_):
+    bonus = Bonus()
+    bonus.bonus_type = bonus_type_
+    bonus.visible = 1
+    bonus.x_pos = x_
+    bonus.y_pos = y_
+    return bonus

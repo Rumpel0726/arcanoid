@@ -1,6 +1,6 @@
 from init_glob_vars import *
 import random as rn
-from Bonus import Bonus
+from Bonus import make_bonus
 from Brick import brick_score
 
 
@@ -31,30 +31,18 @@ class Ball():
                     level_bricks[i].set_unvisible()
                     game_menu.set_score(brick_score(level_bricks[i]))
                     # Создание бонуса
+                    brick_rect = level_bricks[i].get_rect()
                     if level_bricks[i].bonus == 1:
-                        bonus = Bonus()
+                        bonus_type = "plus"
                         if rn.randint(0, 1) == 0:
-                            bonus.bonus_type = "plus"
+                            bonus_type = "plus"
                         elif rn.randint(0, 1) == 1:
-                            bonus.bonus_type = "minus"
-                        bonus.visible = 1
-                        bonus.x_pos = level_bricks[i].get_rect().x
-                        bonus.y_pos = level_bricks[i].get_rect().y
-                        bonus_list.append(bonus)
+                            bonus_type = "minus"
+                        bonus_list.append(make_bonus(bonus_type, brick_rect.x, brick_rect.y))
                     elif level_bricks[i].bonus == 2:
-                        bonus = Bonus()
-                        bonus.bonus_type = "plus"
-                        bonus.visible = 1
-                        bonus.x_pos = level_bricks[i].get_rect().x
-                        bonus.y_pos = level_bricks[i].get_rect().y
-                        bonus_list.append(bonus)
+                        bonus_list.append(make_bonus("plus", brick_rect.x, brick_rect.y))
                     elif level_bricks[i].bonus == 3:
-                        bonus = Bonus()
-                        bonus.bonus_type = "circle"
-                        bonus.visible = 1
-                        bonus.x_pos = level_bricks[i].get_rect().x
-                        bonus.y_pos = level_bricks[i].get_rect().y
-                        bonus_list.append(bonus)
+                        bonus_list.append(make_bonus("circle", brick_rect.x, brick_rect.y))
                 elif level_bricks[i].get_color() == st.YELLOW:
                     level_bricks[i].set_color(st.RED)
                 elif level_bricks[i].get_color() == st.ORANGE:
