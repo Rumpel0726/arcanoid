@@ -1,0 +1,62 @@
+// Граф вызовов игровой логики арканоида: после изменений - часть «Кирпич и мяч»
+// Сгенерировано из описания графа; цвет - категория кода, * и пунктир - спорное положение
+digraph after_bricks {
+    rankdir=TB; newrank=true; ranksep=0.35; nodesep=0.2;
+    node [shape=plain, fontname="Consolas", fontsize=10];
+    edge [color="#7a8494", arrowsize=0.45, penwidth=0.8];
+
+    // подписи слоёв
+    L6 [shape=plaintext, fontname="Segoe UI", fontsize=10, fontcolor="#1f4e8c", label="6. Действия объектов за кадр"];
+    L5 [shape=plaintext, fontname="Segoe UI", fontsize=10, fontcolor="#1f4e8c", label="5. Правила игры"];
+    L4 [shape=plaintext, fontname="Segoe UI", fontsize=10, fontcolor="#1f4e8c", label="4. Операции над сущностями"];
+    L3 [shape=plaintext, fontname="Segoe UI", fontsize=10, fontcolor="#1f4e8c", label="3. Конструкторы"];
+    L2 [shape=plaintext, fontname="Segoe UI", fontsize=10, fontcolor="#1f4e8c", label="2. Структуры данных (классы)"];
+    L0 [shape=plaintext, fontname="Segoe UI", fontsize=10, fontcolor="#1f4e8c", label="0. Python, pygame, настройки"];
+    L6 -> L5 -> L4 -> L3 -> L2 -> L0 [style=invis];
+
+    // слой 6: Действия объектов за кадр
+    ball6_0 [shape=box, style="rounded,filled", fillcolor="#fbe3d6", color="#c0582b", label="Ball.move"];
+    { rank=same; L6; ball6_0; }
+
+    // слой 5: Правила игры
+    brickpy5_0 [shape=box, style="rounded,filled", fillcolor="#e3f1e6", color="#2e7d4f", label="brick_score"];
+    bonuspy5_0 [shape=box, style="rounded,filled", fillcolor="#e3f1e6", color="#2e7d4f", label="choose_bonus_type"];
+    levelpy5_0 [shape=box, style="rounded,filled", fillcolor="#e3f1e6", color="#2e7d4f", label="is_level_win"];
+    { rank=same; L5; brickpy5_0; bonuspy5_0; levelpy5_0; }
+
+    // слой 4: Операции над сущностями
+    ballpy4_2 [shape=box, style="rounded,filled", fillcolor="#e3f1e6", color="#2e7d4f", label="is_brick_hit"];
+    levelpy4_1 [shape=box, style="rounded,filled", fillcolor="#e3f1e6", color="#2e7d4f", label="count_visible_bricks"];
+    { rank=same; L4; ballpy4_2; levelpy4_1; }
+
+    // слой 3: Конструкторы
+    brickpy3_0 [shape=box, style="rounded,filled", fillcolor="#e2ebf7", color="#2f5d9a", label="make_brick"];
+    { rank=same; L3; brickpy3_0; }
+
+    // слой 2: Структуры данных (классы)
+    brick2_0 [shape=box, style="rounded,filled", fillcolor="#e2ebf7", color="#2f5d9a", label="Brick()"];
+    brick2_4 [shape=box, style="rounded,filled,dashed", fillcolor="#e2ebf7", color="#2f5d9a", label="Brick.get_rect *"];
+    brick2_5 [shape=box, style="rounded,filled,dashed", fillcolor="#e2ebf7", color="#2f5d9a", label="Brick.get_visible *"];
+    brick2_7 [shape=box, style="rounded,filled,dashed", fillcolor="#e2ebf7", color="#2f5d9a", label="Brick.get_bonus *"];
+    { rank=same; L2; brick2_0; brick2_4; brick2_5; brick2_7; }
+
+    // слой 0: Python, pygame, настройки
+    py0_0 [shape=box, style="rounded,filled", fillcolor="#eeeeee", color="#8a8a8a", label="for"];
+    py0_1 [shape=box, style="rounded,filled", fillcolor="#eeeeee", color="#8a8a8a", label="len()"];
+    py0_2 [shape=box, style="rounded,filled", fillcolor="#eeeeee", color="#8a8a8a", label="[i]"];
+    py0_3 [shape=box, style="rounded,filled", fillcolor="#eeeeee", color="#8a8a8a", label=".поле"];
+    pg0_1 [shape=box, style="rounded,filled", fillcolor="#eeeeee", color="#8a8a8a", label="colliderect()"];
+    { rank=same; L0; py0_0; py0_1; py0_2; py0_3; pg0_1; }
+
+    // вызовы
+    ball6_0 -> { py0_0; py0_1; py0_2; ballpy4_2; brick2_4; brickpy5_0; bonuspy5_0; }  // Ball.move
+    brickpy5_0 -> { brick2_7; }  // brick_score
+    bonuspy5_0 -> { brick2_7; }  // choose_bonus_type
+    levelpy5_0 -> { levelpy4_1; }  // is_level_win
+    ballpy4_2 -> { pg0_1; brick2_4; brick2_5; }  // is_brick_hit
+    levelpy4_1 -> { py0_0; brick2_5; }  // count_visible_bricks
+    brickpy3_0 -> { brick2_0; }  // make_brick
+    brick2_4 -> { py0_3; }  // Brick.get_rect
+    brick2_5 -> { py0_3; }  // Brick.get_visible
+    brick2_7 -> { py0_3; }  // Brick.get_bonus
+}

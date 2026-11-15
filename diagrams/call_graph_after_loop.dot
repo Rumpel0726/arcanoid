@@ -1,0 +1,54 @@
+// Граф вызовов игровой логики арканоида: после изменений - часть «Игровой цикл»
+// Сгенерировано из описания графа; цвет - категория кода, * и пунктир - спорное положение
+digraph after_loop {
+    rankdir=TB; newrank=true; ranksep=0.35; nodesep=0.2;
+    node [shape=plain, fontname="Consolas", fontsize=10];
+    edge [color="#7a8494", arrowsize=0.45, penwidth=0.8];
+
+    // подписи слоёв
+    L8 [shape=plaintext, fontname="Segoe UI", fontsize=10, fontcolor="#1f4e8c", label="8. Игровой цикл"];
+    L7 [shape=plaintext, fontname="Segoe UI", fontsize=10, fontcolor="#1f4e8c", label="7. Действия над списками объектов"];
+    L6 [shape=plaintext, fontname="Segoe UI", fontsize=10, fontcolor="#1f4e8c", label="6. Действия объектов за кадр"];
+    L5 [shape=plaintext, fontname="Segoe UI", fontsize=10, fontcolor="#1f4e8c", label="5. Правила игры"];
+    L2 [shape=plaintext, fontname="Segoe UI", fontsize=10, fontcolor="#1f4e8c", label="2. Структуры данных (классы)"];
+    L0 [shape=plaintext, fontname="Segoe UI", fontsize=10, fontcolor="#1f4e8c", label="0. Python, pygame, настройки"];
+    L8 -> L7 -> L6 -> L5 -> L2 -> L0 [style=invis];
+
+    // слой 8: Игровой цикл
+    game8_1 [shape=box, style="rounded,filled", fillcolor="#fbe3d6", color="#c0582b", label="Game.start"];
+    { rank=same; L8; game8_1; }
+
+    // слой 7: Действия над списками объектов
+    levelpy7_0 [shape=box, style="rounded,filled", fillcolor="#fbe3d6", color="#c0582b", label="draw_bricks"];
+    bonuspy7_0 [shape=box, style="rounded,filled", fillcolor="#fbe3d6", color="#c0582b", label="update_bonuses"];
+    { rank=same; L7; levelpy7_0; bonuspy7_0; }
+
+    // слой 6: Действия объектов за кадр
+    bonus6_0 [shape=box, style="rounded,filled", fillcolor="#fbe3d6", color="#c0582b", label="Bonus.move"];
+    bonus6_1 [shape=box, style="rounded,filled", fillcolor="#fbe3d6", color="#c0582b", label="Bonus.draw"];
+    { rank=same; L6; bonus6_0; bonus6_1; }
+
+    // слой 5: Правила игры
+    bonuspy5_1 [shape=box, style="rounded,filled", fillcolor="#e3f1e6", color="#2e7d4f", label="apply_bonus"];
+    bonuspy5_2 [shape=box, style="rounded,filled", fillcolor="#e3f1e6", color="#2e7d4f", label="is_bonus_caught"];
+    { rank=same; L5; bonuspy5_1; bonuspy5_2; }
+
+    // слой 2: Структуры данных (классы)
+    brick2_8 [shape=box, style="rounded,filled,dashed", fillcolor="#fbe3d6", color="#c0582b", label="Brick.draw *"];
+    racket2_2 [shape=box, style="rounded,filled,dashed", fillcolor="#e2ebf7", color="#2f5d9a", label="Racket.get_rect *"];
+    { rank=same; L2; brick2_8; racket2_2; }
+
+    // слой 0: Python, pygame, настройки
+    py0_0 [shape=box, style="rounded,filled", fillcolor="#eeeeee", color="#8a8a8a", label="for"];
+    py0_1 [shape=box, style="rounded,filled", fillcolor="#eeeeee", color="#8a8a8a", label="len()"];
+    py0_2 [shape=box, style="rounded,filled", fillcolor="#eeeeee", color="#8a8a8a", label="[i]"];
+    py0_3 [shape=box, style="rounded,filled", fillcolor="#eeeeee", color="#8a8a8a", label=".поле"];
+    pg0_1 [shape=box, style="rounded,filled", fillcolor="#eeeeee", color="#8a8a8a", label="colliderect()"];
+    { rank=same; L0; py0_0; py0_1; py0_2; py0_3; pg0_1; }
+
+    // вызовы
+    game8_1 -> { levelpy7_0; py0_0; bonuspy7_0; racket2_2; py0_3; }  // Game.start
+    levelpy7_0 -> { py0_0; py0_1; py0_2; brick2_8; }  // draw_bricks
+    bonuspy7_0 -> { py0_0; py0_1; py0_2; bonus6_1; bonus6_0; bonuspy5_2; py0_3; bonuspy5_1; }  // update_bonuses
+    bonuspy5_2 -> { py0_3; pg0_1; }  // is_bonus_caught
+}
