@@ -26,7 +26,7 @@ class Ball():
         score = 0
         # Условие отражения с кирпичем
         for i in range(len(level_bricks)):
-            if self.ball.colliderect(level_bricks[i].get_rect()) and level_bricks[i].get_visible() == 1:
+            if is_brick_hit(self.ball, level_bricks[i]):
                 if not self.no_colis:
                     self.dy = -self.dy
                 new_color = next_brick_color(level_bricks[i].get_color())
@@ -73,6 +73,11 @@ def bounce_side_wall(ball_, radius_, field_w_, dx_):
     if ball_.centerx < radius_ or ball_.centerx > field_w_ - radius_:
         return -dx_
     return dx_
+
+
+# Мячик попал в целый кирпич
+def is_brick_hit(ball_, brick_):
+    return ball_.colliderect(brick_.get_rect()) and brick_.get_visible() == 1
 
 
 # Мячик долетел до верхней стены
