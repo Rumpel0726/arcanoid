@@ -42,15 +42,16 @@ def is_bonus_out(y_pos_, field_h_):
 # Тип бонуса из разбитого кирпича, '' - бонуса нет
 # rnd1_ и rnd2_ - случайные числа 0 или 1
 def choose_bonus_type(brick_, rnd1_, rnd2_):
-    if brick_.bonus == 1:
+    bonus = brick_.get_bonus()
+    if bonus == 1:
         if rnd1_ == 0:
             return "plus"
         elif rnd2_ == 1:
             return "minus"
         return "plus"
-    elif brick_.bonus == 2:
+    elif bonus == 2:
         return "plus"
-    elif brick_.bonus == 3:
+    elif bonus == 3:
         return "circle"
     return ''
 

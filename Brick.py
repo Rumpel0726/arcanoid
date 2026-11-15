@@ -36,6 +36,10 @@ class Brick():
     def get_color(self):
         return self.color
 
+    # Какой бонус выпадает из кирпича
+    def get_bonus(self):
+        return self.bonus
+
 
 # Прямоугольник кирпича по его месту в сетке уровня
 def brick_rect_by_pos(x_pos_, y_pos_, w_, h_):
@@ -71,10 +75,11 @@ def next_brick_color(color_):
 
 # Очки за разбитый кирпич
 def brick_score(brick_):
-    if brick_.bonus == 0:
+    bonus = brick_.get_bonus()
+    if bonus == 0:
         return 10
-    elif brick_.bonus == 1:
+    elif bonus == 1:
         return 20
-    elif brick_.bonus == 2:
+    elif bonus == 2:
         return 40
     return 0

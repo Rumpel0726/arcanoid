@@ -38,7 +38,7 @@ def make_level_bricks(level_):
 def count_visible_bricks(level_bricks):
     cnt_brick = 0
     for i in level_bricks:
-        if i.disp == 1:
+        if i.get_visible() == 1:
             cnt_brick += 1
     return cnt_brick
 
