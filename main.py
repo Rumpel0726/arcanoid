@@ -2,7 +2,6 @@ from init_glob_vars import *
 from Racket import Racket, move_racket
 from Bonus import is_bonus_caught, apply_bonus
 from Ball import Ball
-from Brick import Brick
 from Level import draw_bricks, is_level_win, load_levels, make_level_bricks
 from MainMenu import MainMenu
 from GameMenu import GameMenu
@@ -39,7 +38,6 @@ class Game:
         self.user_name = ''
         self.db = DB()
         self.level_bricks = make_level_bricks(self.levels[self.level_num])
-        self.brick = Brick()
         self.game_menu = GameMenu(self.level_num + 1, self.score)
         self.lose_menu = LoseMenu()
         self.bonus_list = []
@@ -61,7 +59,6 @@ class Game:
         self.racket = Racket()
         self.ball = Ball()
         self.level_bricks = make_level_bricks(self.levels[self.level_num])
-        self.brick = Brick()
         self.game_menu = GameMenu(self.level_num + 1, self.score)
         self.game_menu.hscore = self.start_hscore
         self.bonus_list = []

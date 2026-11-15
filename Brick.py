@@ -2,10 +2,9 @@ from init_glob_vars import *
 
 
 class Brick():
-    def __init__(self, color_=st.RED, bonus_=0, strong_=1, display_=1):
+    def __init__(self, color_=st.RED, bonus_=0, display_=1):
         self.color = color_
         self.bonus = bonus_
-        self.strong = strong_
         self.disp = display_
         self.x_pos = 0
         self.y_pos = 0
@@ -18,9 +17,6 @@ class Brick():
 
     def set_color(self, color_):
         self.color = color_
-
-    def set_strong(self, strong_):
-        self.strong = strong_
 
     def draw(self):
         pygame.draw.rect(screen, self.color, self.brick_rect)
@@ -49,7 +45,7 @@ def brick_rect_by_pos(x_pos_, y_pos_, w_, h_):
 # Создание кирпича по коду из файла уровня
 def make_brick(code_, x_, y_):
     if code_ == 2:
-        brick = Brick(st.YELLOW, 1, 2)
+        brick = Brick(st.YELLOW, 1)
     elif code_ == 3:
         brick = Brick(st.ORANGE, 2)
     elif code_ == 4:
