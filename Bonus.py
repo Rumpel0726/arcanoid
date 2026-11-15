@@ -72,6 +72,18 @@ def apply_bonus(bonus_type_, width_, eng_, no_colis_):
     return width_, eng_, no_colis_
 
 
+# Падение и подбор бонусов за кадр
+# Возвращает новые ширину рокетки, центральную зону и прохождение мячика сквозь кирпичи
+def update_bonuses(bonus_list, racket_rect_, width_, eng_, no_colis_):
+    for i in range(len(bonus_list)):
+        bonus_list[i].draw()
+        bonus_list[i].move()
+        if is_bonus_caught(racket_rect_, bonus_list[i]):
+            bonus_list[i].visible = 0
+            width_, eng_, no_colis_ = apply_bonus(bonus_list[i].bonus_type, width_, eng_, no_colis_)
+    return width_, eng_, no_colis_
+
+
 # Создание бонуса
 def make_bonus(bonus_type_, x_, y_):
     bonus = Bonus()

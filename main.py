@@ -1,6 +1,6 @@
 from init_glob_vars import *
 from Racket import Racket, move_racket
-from Bonus import is_bonus_caught, apply_bonus
+from Bonus import update_bonuses
 from Ball import Ball
 from Level import draw_bricks, is_level_win, load_levels, make_level_bricks
 from MainMenu import MainMenu
@@ -228,12 +228,8 @@ class Game:
                     self.f_run = 'WIN'
                     self.score = self.game_menu.get_score()
                 draw_bricks(self.level_bricks)
-                for i in range(len(self.bonus_list)): # проверка косания с бонусом
-                    self.bonus_list[i].draw()
-                    self.bonus_list[i].move()
-                    if is_bonus_caught(self.racket.get_rect(), self.bonus_list[i]):
-                        self.bonus_list[i].visible = 0
-                        rocket_width_, self.racket_eng, self.ball.no_colis = apply_bonus(self.bonus_list[i].bonus_type, rocket_width_, self.racket_eng, self.ball.no_colis)
+                # Падение и подбор бонусов
+                rocket_width_, self.racket_eng, self.ball.no_colis = update_bonuses(self.bonus_list, self.racket.get_rect(), rocket_width_, self.racket_eng, self.ball.no_colis)
                 if self.score > self.game_menu.hscore:
                     self.game_menu.hscore = self.score
                     self.db.set_hscore(self.user_name, self.game_menu.hscore)
