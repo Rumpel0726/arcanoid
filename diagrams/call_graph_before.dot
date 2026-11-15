@@ -1,0 +1,132 @@
+// Граф вызовов игровой логики арканоида: исходное состояние (тег seminar-1)
+// Сгенерировано из описания графа; цвет - категория кода, * и пунктир - спорное положение
+digraph before {
+    rankdir=TB; newrank=true; ranksep=0.5; nodesep=0.12;
+    node [shape=plain, fontname="Consolas", fontsize=10];
+    edge [color="#7a8494", arrowsize=0.45, penwidth=0.8];
+
+    // подписи слоёв
+    L8 [shape=plaintext, fontname="Segoe UI", fontsize=10, fontcolor="#1f4e8c", label="8. Запуск"];
+    L7 [shape=plaintext, fontname="Segoe UI", fontsize=10, fontcolor="#1f4e8c", label="7. Игровой цикл"];
+    L6 [shape=plaintext, fontname="Segoe UI", fontsize=10, fontcolor="#1f4e8c", label="6. Действия объектов за кадр"];
+    L5 [shape=plaintext, fontname="Segoe UI", fontsize=10, fontcolor="#1f4e8c", label="5. Правила игры"];
+    L4 [shape=plaintext, fontname="Segoe UI", fontsize=10, fontcolor="#1f4e8c", label="4. Операции над сущностями"];
+    L3 [shape=plaintext, fontname="Segoe UI", fontsize=10, fontcolor="#1f4e8c", label="3. Конструкторы"];
+    L2 [shape=plaintext, fontname="Segoe UI", fontsize=10, fontcolor="#1f4e8c", label="2. Структуры данных (классы)"];
+    L1 [shape=plaintext, fontname="Segoe UI", fontsize=10, fontcolor="#1f4e8c", label="1. Общие операции"];
+    L0 [shape=plaintext, fontname="Segoe UI", fontsize=10, fontcolor="#1f4e8c", label="0. Python, pygame, настройки"];
+    L8 -> L7 -> L6 -> L5 -> L4 -> L3 -> L2 -> L1 -> L0 [style=invis];
+
+    // легенда
+    legend [label=<<TABLE BORDER="0" CELLSPACING="1" CELLPADDING="2"><TR><TD BGCOLOR="#fbe3d6" ALIGN="LEFT">действие</TD></TR><TR><TD BGCOLOR="#e3f1e6" ALIGN="LEFT">вычисление</TD></TR><TR><TD BGCOLOR="#e2ebf7" ALIGN="LEFT">данные</TD></TR><TR><TD BGCOLOR="#eeeeee" ALIGN="LEFT">язык / библиотека</TD></TR><TR><TD ALIGN="LEFT">* спорное положение</TD></TR></TABLE>>];
+
+    // слой 8: Запуск
+    main8 [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="1" CELLPADDING="2" COLOR="#c0582b" STYLE="rounded"><TR><TD BORDER="0"><FONT POINT-SIZE="9" COLOR="#5d6676">main.py</FONT></TD></TR><TR><TD PORT="start_game" BGCOLOR="#fbe3d6" ALIGN="LEFT">start_game</TD></TR></TABLE>>];
+    { rank=same; L8; legend; main8; }
+
+    // слой 7: Игровой цикл
+    game7 [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="1" CELLPADDING="2" COLOR="#c0582b" STYLE="rounded"><TR><TD BORDER="0"><FONT POINT-SIZE="9" COLOR="#5d6676">class Game</FONT></TD></TR><TR><TD PORT="Game()" BGCOLOR="#fbe3d6" ALIGN="LEFT">Game()</TD></TR><TR><TD PORT="Game.start" BGCOLOR="#fbe3d6" ALIGN="LEFT">start</TD></TR></TABLE>>];
+    { rank=same; L7; game7; }
+
+    // слой 6: Действия объектов за кадр
+    game6 [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="1" CELLPADDING="2" COLOR="#c0582b" STYLE="rounded"><TR><TD BORDER="0"><FONT POINT-SIZE="9" COLOR="#5d6676">class Game</FONT></TD></TR><TR><TD PORT="Game.set_game" BGCOLOR="#fbe3d6" ALIGN="LEFT">set_game</TD></TR></TABLE>>];
+    ball6 [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="1" CELLPADDING="2" COLOR="#c0582b" STYLE="rounded"><TR><TD BORDER="0"><FONT POINT-SIZE="9" COLOR="#5d6676">class Ball</FONT></TD></TR><TR><TD PORT="Ball.move" BGCOLOR="#fbe3d6" ALIGN="LEFT">move</TD></TR><TR><TD PORT="Ball.draw" BGCOLOR="#fbe3d6" ALIGN="LEFT">draw</TD></TR></TABLE>>];
+    bonus6 [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="1" CELLPADDING="2" COLOR="#c0582b" STYLE="rounded"><TR><TD BORDER="0"><FONT POINT-SIZE="9" COLOR="#5d6676">class Bonus</FONT></TD></TR><TR><TD PORT="Bonus.move" BGCOLOR="#fbe3d6" ALIGN="LEFT">move</TD></TR><TR><TD PORT="Bonus.draw" BGCOLOR="#fbe3d6" ALIGN="LEFT">draw</TD></TR></TABLE>>];
+    level6 [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="1" CELLPADDING="2" COLOR="#c0582b" STYLE="rounded"><TR><TD BORDER="0"><FONT POINT-SIZE="9" COLOR="#5d6676">class Level</FONT></TD></TR><TR><TD PORT="Level.draw" BGCOLOR="#fbe3d6" ALIGN="LEFT">draw</TD></TR></TABLE>>];
+    racket6 [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="1" CELLPADDING="2" COLOR="#c0582b" STYLE="rounded"><TR><TD BORDER="0"><FONT POINT-SIZE="9" COLOR="#5d6676">class Racket</FONT></TD></TR><TR><TD PORT="Racket.draw" BGCOLOR="#fbe3d6" ALIGN="LEFT">draw</TD></TR></TABLE>>];
+    menu6 [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="1" CELLPADDING="2" COLOR="#c0582b" STYLE="rounded"><TR><TD BORDER="0"><FONT POINT-SIZE="9" COLOR="#5d6676">class GameMenu</FONT></TD></TR><TR><TD PORT="GameMenu.draw" BGCOLOR="#fbe3d6" ALIGN="LEFT">draw</TD></TR></TABLE>>];
+    levelpy6 [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="1" CELLPADDING="2" COLOR="#c0582b" STYLE="rounded"><TR><TD BORDER="0"><FONT POINT-SIZE="9" COLOR="#5d6676">Level.py</FONT></TD></TR><TR><TD PORT="load_levels" BGCOLOR="#fbe3d6" ALIGN="LEFT">load_levels</TD></TR></TABLE>>];
+    { rank=same; L6; game6; ball6; bonus6; level6; racket6; menu6; levelpy6; }
+
+    // слой 5: Правила игры
+    brickpy5 [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="1" CELLPADDING="2" COLOR="#2e7d4f" STYLE="rounded"><TR><TD BORDER="0"><FONT POINT-SIZE="9" COLOR="#5d6676">Brick.py</FONT></TD></TR><TR><TD PORT="brick_score" BGCOLOR="#e3f1e6" ALIGN="LEFT">brick_score</TD></TR></TABLE>>];
+    bonuspy5 [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="1" CELLPADDING="2" COLOR="#2e7d4f" STYLE="rounded"><TR><TD BORDER="0"><FONT POINT-SIZE="9" COLOR="#5d6676">Bonus.py</FONT></TD></TR><TR><TD PORT="choose_bonus_type" BGCOLOR="#e3f1e6" ALIGN="LEFT">choose_bonus_type</TD></TR><TR><TD PORT="apply_bonus" BGCOLOR="#e3f1e6" ALIGN="LEFT">apply_bonus</TD></TR><TR><TD PORT="is_bonus_caught" BGCOLOR="#e3f1e6" ALIGN="LEFT">is_bonus_caught</TD></TR><TR><TD PORT="is_bonus_out" BGCOLOR="#e3f1e6" ALIGN="LEFT">is_bonus_out</TD></TR></TABLE>>];
+    ballpy5 [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="1" CELLPADDING="2" COLOR="#2e7d4f" STYLE="rounded"><TR><TD BORDER="0"><FONT POINT-SIZE="9" COLOR="#5d6676">Ball.py</FONT></TD></TR><TR><TD PORT="is_ball_lost" BGCOLOR="#e3f1e6" ALIGN="LEFT">is_ball_lost</TD></TR></TABLE>>];
+    levelpy5 [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="1" CELLPADDING="2" COLOR="#2e7d4f" STYLE="rounded"><TR><TD BORDER="0"><FONT POINT-SIZE="9" COLOR="#5d6676">Level.py</FONT></TD></TR><TR><TD PORT="is_level_win" BGCOLOR="#e3f1e6" ALIGN="LEFT">is_level_win</TD></TR></TABLE>>];
+    { rank=same; L5; brickpy5; bonuspy5; ballpy5; levelpy5; }
+
+    // слой 4: Операции над сущностями
+    ballpy4 [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="1" CELLPADDING="2" COLOR="#2e7d4f" STYLE="rounded"><TR><TD BORDER="0"><FONT POINT-SIZE="9" COLOR="#5d6676">Ball.py</FONT></TD></TR><TR><TD PORT="move_ball" BGCOLOR="#e3f1e6" ALIGN="LEFT">move_ball</TD></TR><TR><TD PORT="bounce_side_wall" BGCOLOR="#e3f1e6" ALIGN="LEFT">bounce_side_wall</TD></TR><TR><TD PORT="is_top_wall_hit" BGCOLOR="#e3f1e6" ALIGN="LEFT">is_top_wall_hit</TD></TR><TR><TD PORT="bounce_racket" BGCOLOR="#e3f1e6" ALIGN="LEFT">bounce_racket</TD></TR></TABLE>>];
+    racketpy4 [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="1" CELLPADDING="2" COLOR="#2e7d4f" STYLE="rounded"><TR><TD BORDER="0"><FONT POINT-SIZE="9" COLOR="#5d6676">Racket.py</FONT></TD></TR><TR><TD PORT="move_racket" BGCOLOR="#e3f1e6" ALIGN="LEFT">move_racket</TD></TR></TABLE>>];
+    bonuspy4 [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="1" CELLPADDING="2" COLOR="#2e7d4f" STYLE="rounded"><TR><TD BORDER="0"><FONT POINT-SIZE="9" COLOR="#5d6676">Bonus.py</FONT></TD></TR><TR><TD PORT="fall_bonus" BGCOLOR="#e3f1e6" ALIGN="LEFT">fall_bonus</TD></TR></TABLE>>];
+    brickpy4 [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="1" CELLPADDING="2" COLOR="#2e7d4f" STYLE="rounded"><TR><TD BORDER="0"><FONT POINT-SIZE="9" COLOR="#5d6676">Brick.py</FONT></TD></TR><TR><TD PORT="next_brick_color" BGCOLOR="#e3f1e6" ALIGN="LEFT">next_brick_color</TD></TR></TABLE>>];
+    levelpy4 [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="1" CELLPADDING="2" COLOR="#2e7d4f" STYLE="rounded"><TR><TD BORDER="0"><FONT POINT-SIZE="9" COLOR="#5d6676">Level.py</FONT></TD></TR><TR><TD PORT="make_level_bricks" BGCOLOR="#e3f1e6" ALIGN="LEFT">make_level_bricks</TD></TR><TR><TD PORT="count_visible_bricks" BGCOLOR="#e3f1e6" ALIGN="LEFT">count_visible_bricks</TD></TR><TR><TD PORT="parse_level" BGCOLOR="#e3f1e6" ALIGN="LEFT">parse_level</TD></TR></TABLE>>];
+    { rank=same; L4; ballpy4; racketpy4; bonuspy4; brickpy4; levelpy4; }
+
+    // слой 3: Конструкторы
+    brickpy3 [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="1" CELLPADDING="2" COLOR="#2f5d9a" STYLE="rounded"><TR><TD BORDER="0"><FONT POINT-SIZE="9" COLOR="#5d6676">Brick.py</FONT></TD></TR><TR><TD PORT="make_brick" BGCOLOR="#e2ebf7" ALIGN="LEFT">make_brick</TD></TR></TABLE>>];
+    bonuspy3 [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="1" CELLPADDING="2" COLOR="#2f5d9a" STYLE="rounded"><TR><TD BORDER="0"><FONT POINT-SIZE="9" COLOR="#5d6676">Bonus.py</FONT></TD></TR><TR><TD PORT="make_bonus" BGCOLOR="#e2ebf7" ALIGN="LEFT">make_bonus</TD></TR></TABLE>>];
+    { rank=same; L3; brickpy3; bonuspy3; }
+
+    // слой 2: Структуры данных (классы)
+    brick2 [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="1" CELLPADDING="2" COLOR="#9aa6b8" STYLE="rounded"><TR><TD BORDER="0"><FONT POINT-SIZE="9" COLOR="#5d6676">class Brick</FONT></TD></TR><TR><TD PORT="Brick()" BGCOLOR="#e2ebf7" ALIGN="LEFT">Brick()</TD></TR><TR><TD PORT="Brick.set_pos" BGCOLOR="#fbe3d6" ALIGN="LEFT">set_pos</TD></TR><TR><TD PORT="Brick.set_color" BGCOLOR="#fbe3d6" ALIGN="LEFT">set_color</TD></TR><TR><TD PORT="Brick.set_strong" BGCOLOR="#fbe3d6" ALIGN="LEFT">set_strong</TD></TR><TR><TD PORT="Brick.set_unvisible" BGCOLOR="#fbe3d6" ALIGN="LEFT">set_unvisible</TD></TR><TR><TD PORT="Brick.get_rect" BGCOLOR="#e2ebf7" ALIGN="LEFT">get_rect *</TD></TR><TR><TD PORT="Brick.get_visible" BGCOLOR="#e2ebf7" ALIGN="LEFT">get_visible *</TD></TR><TR><TD PORT="Brick.get_color" BGCOLOR="#e2ebf7" ALIGN="LEFT">get_color *</TD></TR><TR><TD PORT="Brick.draw" BGCOLOR="#fbe3d6" ALIGN="LEFT">draw *</TD></TR></TABLE>>];
+    bonus2 [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="1" CELLPADDING="2" COLOR="#2f5d9a" STYLE="rounded"><TR><TD BORDER="0"><FONT POINT-SIZE="9" COLOR="#5d6676">class Bonus</FONT></TD></TR><TR><TD PORT="Bonus()" BGCOLOR="#e2ebf7" ALIGN="LEFT">Bonus()</TD></TR><TR><TD PORT="Bonus.get_rect" BGCOLOR="#e2ebf7" ALIGN="LEFT">get_rect *</TD></TR></TABLE>>];
+    ball2 [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="1" CELLPADDING="2" COLOR="#2f5d9a" STYLE="rounded"><TR><TD BORDER="0"><FONT POINT-SIZE="9" COLOR="#5d6676">class Ball</FONT></TD></TR><TR><TD PORT="Ball()" BGCOLOR="#e2ebf7" ALIGN="LEFT">Ball()</TD></TR></TABLE>>];
+    racket2 [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="1" CELLPADDING="2" COLOR="#9aa6b8" STYLE="rounded"><TR><TD BORDER="0"><FONT POINT-SIZE="9" COLOR="#5d6676">class Racket</FONT></TD></TR><TR><TD PORT="Racket()" BGCOLOR="#e2ebf7" ALIGN="LEFT">Racket()</TD></TR><TR><TD PORT="Racket.set_rect" BGCOLOR="#fbe3d6" ALIGN="LEFT">set_rect</TD></TR><TR><TD PORT="Racket.get_rect" BGCOLOR="#e2ebf7" ALIGN="LEFT">get_rect *</TD></TR></TABLE>>];
+    level2 [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="1" CELLPADDING="2" COLOR="#2f5d9a" STYLE="rounded"><TR><TD BORDER="0"><FONT POINT-SIZE="9" COLOR="#5d6676">class Level</FONT></TD></TR><TR><TD PORT="Level()" BGCOLOR="#e2ebf7" ALIGN="LEFT">Level()</TD></TR></TABLE>>];
+    menu2 [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="1" CELLPADDING="2" COLOR="#9aa6b8" STYLE="rounded"><TR><TD BORDER="0"><FONT POINT-SIZE="9" COLOR="#5d6676">class GameMenu</FONT></TD></TR><TR><TD PORT="GameMenu.get_score" BGCOLOR="#e2ebf7" ALIGN="LEFT">get_score *</TD></TR><TR><TD PORT="GameMenu.set_score" BGCOLOR="#fbe3d6" ALIGN="LEFT">set_score</TD></TR><TR><TD PORT="GameMenu.set_name" BGCOLOR="#fbe3d6" ALIGN="LEFT">set_name</TD></TR></TABLE>>];
+    db2 [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="1" CELLPADDING="2" COLOR="#9aa6b8" STYLE="rounded"><TR><TD BORDER="0"><FONT POINT-SIZE="9" COLOR="#5d6676">class DB</FONT></TD></TR><TR><TD PORT="DB.get_hscore" BGCOLOR="#e2ebf7" ALIGN="LEFT">get_hscore *</TD></TR><TR><TD PORT="DB.set_hscore" BGCOLOR="#fbe3d6" ALIGN="LEFT">set_hscore</TD></TR></TABLE>>];
+    { rank=same; L2; brick2; bonus2; ball2; racket2; level2; menu2; db2; }
+
+    // слой 1: Общие операции
+    lists1 [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="1" CELLPADDING="2" COLOR="#2e7d4f" STYLE="rounded"><TR><TD BORDER="0"><FONT POINT-SIZE="9" COLOR="#5d6676">lists.py</FONT></TD></TR><TR><TD PORT="add_element_last" BGCOLOR="#e3f1e6" ALIGN="LEFT">add_element_last</TD></TR></TABLE>>];
+    brickpy1 [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="1" CELLPADDING="2" COLOR="#2e7d4f" STYLE="rounded"><TR><TD BORDER="0"><FONT POINT-SIZE="9" COLOR="#5d6676">Brick.py</FONT></TD></TR><TR><TD PORT="brick_rect_by_pos" BGCOLOR="#e3f1e6" ALIGN="LEFT">brick_rect_by_pos</TD></TR></TABLE>>];
+    { rank=same; L1; lists1; brickpy1; }
+
+    // слой 0: Python, pygame, настройки
+    py0 [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="1" CELLPADDING="2" COLOR="#8a8a8a" STYLE="rounded"><TR><TD BORDER="0"><FONT POINT-SIZE="9" COLOR="#5d6676">Python</FONT></TD></TR><TR><TD PORT="for" BGCOLOR="#eeeeee" ALIGN="LEFT">for</TD></TR><TR><TD PORT="len()" BGCOLOR="#eeeeee" ALIGN="LEFT">len()</TD></TR><TR><TD PORT="[i]" BGCOLOR="#eeeeee" ALIGN="LEFT">[i]</TD></TR><TR><TD PORT=".поле" BGCOLOR="#eeeeee" ALIGN="LEFT">.поле</TD></TR><TR><TD PORT=".append()" BGCOLOR="#eeeeee" ALIGN="LEFT">.append()</TD></TR><TR><TD PORT=".copy()" BGCOLOR="#eeeeee" ALIGN="LEFT">.copy()</TD></TR><TR><TD PORT="dict[ключ]" BGCOLOR="#eeeeee" ALIGN="LEFT">dict[ключ]</TD></TR><TR><TD PORT="open()" BGCOLOR="#eeeeee" ALIGN="LEFT">open()</TD></TR><TR><TD PORT="ast.literal_eval()" BGCOLOR="#eeeeee" ALIGN="LEFT">ast.literal_eval()</TD></TR><TR><TD PORT="random.randint()" BGCOLOR="#eeeeee" ALIGN="LEFT">random.randint()</TD></TR></TABLE>>];
+    pg0 [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="1" CELLPADDING="2" COLOR="#8a8a8a" STYLE="rounded"><TR><TD BORDER="0"><FONT POINT-SIZE="9" COLOR="#5d6676">pygame</FONT></TD></TR><TR><TD PORT="pygame.Rect()" BGCOLOR="#eeeeee" ALIGN="LEFT">Rect()</TD></TR><TR><TD PORT="colliderect()" BGCOLOR="#eeeeee" ALIGN="LEFT">colliderect()</TD></TR><TR><TD PORT="pygame.draw" BGCOLOR="#eeeeee" ALIGN="LEFT">draw</TD></TR><TR><TD PORT="screen.blit" BGCOLOR="#eeeeee" ALIGN="LEFT">screen.blit</TD></TR><TR><TD PORT="font.render" BGCOLOR="#eeeeee" ALIGN="LEFT">font.render</TD></TR><TR><TD PORT="pygame.key" BGCOLOR="#eeeeee" ALIGN="LEFT">key</TD></TR></TABLE>>];
+    st0 [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="1" CELLPADDING="2" COLOR="#8a8a8a" STYLE="rounded"><TR><TD BORDER="0"><FONT POINT-SIZE="9" COLOR="#5d6676">settings.py</FONT></TD></TR><TR><TD PORT="st (настройки)" BGCOLOR="#eeeeee" ALIGN="LEFT">st (настройки)</TD></TR></TABLE>>];
+    { rank=same; L0; py0; pg0; st0; }
+
+    // вызовы
+    main8:"start_game" -> { levelpy6:"load_levels"; game7:"Game()"; game7:"Game.start"; }
+    game7:"Game()" -> { racket2:"Racket()"; ball2:"Ball()"; level2:"Level()"; levelpy4:"make_level_bricks"; brick2:"Brick()"; py0:"[i]"; }
+    game7:"Game.start" -> { game6:"Game.set_game"; menu2:"GameMenu.get_score"; menu6:"GameMenu.draw"; racketpy4:"move_racket"; racket2:"Racket.set_rect"; racket6:"Racket.draw"; ball6:"Ball.move"; ball6:"Ball.draw"; menu2:"GameMenu.set_score"; levelpy5:"is_level_win"; level6:"Level.draw"; py0:"for"; py0:"len()"; py0:"[i]"; bonus6:"Bonus.draw"; bonus6:"Bonus.move"; bonuspy5:"is_bonus_caught"; racket2:"Racket.get_rect"; py0:".поле"; bonuspy5:"apply_bonus"; db2:"DB.set_hscore"; pg0:"pygame.key"; pg0:"pygame.draw"; st0:"st (настройки)"; }
+    game6:"Game.set_game" -> { racket2:"Racket()"; ball2:"Ball()"; level2:"Level()"; levelpy4:"make_level_bricks"; brick2:"Brick()"; py0:"[i]"; py0:".поле"; menu2:"GameMenu.set_name"; db2:"DB.get_hscore"; }
+    ball6:"Ball.move" -> { ballpy4:"move_ball"; ballpy5:"is_ball_lost"; py0:"for"; py0:"len()"; py0:"[i]"; pg0:"colliderect()"; brick2:"Brick.get_rect"; brick2:"Brick.get_visible"; brick2:"Brick.get_color"; brickpy4:"next_brick_color"; brick2:"Brick.set_unvisible"; brickpy5:"brick_score"; bonuspy5:"choose_bonus_type"; py0:"random.randint()"; bonuspy3:"make_bonus"; lists1:"add_element_last"; brick2:"Brick.set_color"; ballpy4:"bounce_side_wall"; ballpy4:"is_top_wall_hit"; ballpy4:"bounce_racket"; racket2:"Racket.get_rect"; py0:".поле"; st0:"st (настройки)"; }
+    ball6:"Ball.draw" -> { pg0:"pygame.draw"; py0:".поле"; }
+    bonus6:"Bonus.move" -> { bonuspy4:"fall_bonus"; bonuspy5:"is_bonus_out"; py0:".поле"; st0:"st (настройки)"; }
+    bonus6:"Bonus.draw" -> { pg0:"screen.blit"; py0:".поле"; }
+    level6:"Level.draw" -> { py0:"for"; py0:"len()"; py0:"[i]"; brick2:"Brick.get_visible"; brick2:"Brick.draw"; }
+    racket6:"Racket.draw" -> { pg0:"pygame.draw"; py0:".поле"; st0:"st (настройки)"; }
+    menu6:"GameMenu.draw" -> { pg0:"font.render"; pg0:"screen.blit"; py0:".поле"; }
+    levelpy6:"load_levels" -> { py0:"open()"; py0:"for"; py0:"len()"; py0:"[i]"; py0:".append()"; levelpy4:"parse_level"; }
+    brickpy5:"brick_score" -> { py0:".поле"; }
+    bonuspy5:"choose_bonus_type" -> { py0:".поле"; }
+    bonuspy5:"is_bonus_caught" -> { py0:".поле"; pg0:"colliderect()"; bonus2:"Bonus.get_rect"; }
+    levelpy5:"is_level_win" -> { levelpy4:"count_visible_bricks"; }
+    ballpy5:"is_ball_lost" -> { py0:".поле"; }
+    ballpy4:"move_ball" -> { py0:".copy()"; py0:".поле"; }
+    ballpy4:"bounce_side_wall" -> { py0:".поле"; }
+    ballpy4:"is_top_wall_hit" -> { py0:".поле"; }
+    ballpy4:"bounce_racket" -> { pg0:"colliderect()"; py0:".поле"; }
+    brickpy4:"next_brick_color" -> { st0:"st (настройки)"; }
+    levelpy4:"make_level_bricks" -> { py0:"for"; py0:"len()"; py0:"[i]"; py0:".append()"; brickpy3:"make_brick"; }
+    levelpy4:"count_visible_bricks" -> { py0:"for"; py0:".поле"; }
+    levelpy4:"parse_level" -> { py0:"ast.literal_eval()"; }
+    brickpy3:"make_brick" -> { brick2:"Brick()"; brick2:"Brick.set_pos"; st0:"st (настройки)"; }
+    bonuspy3:"make_bonus" -> { bonus2:"Bonus()"; py0:".поле"; }
+    brick2:"Brick()" -> { brickpy1:"brick_rect_by_pos"; st0:"st (настройки)"; py0:".поле"; }
+    brick2:"Brick.set_pos" -> { brickpy1:"brick_rect_by_pos"; st0:"st (настройки)"; py0:".поле"; }
+    brick2:"Brick.set_color" -> { py0:".поле"; }
+    brick2:"Brick.set_strong" -> { py0:".поле"; }
+    brick2:"Brick.get_rect" -> { py0:".поле"; }
+    brick2:"Brick.get_visible" -> { py0:".поле"; }
+    brick2:"Brick.set_unvisible" -> { py0:".поле"; }
+    brick2:"Brick.get_color" -> { py0:".поле"; }
+    brick2:"Brick.draw" -> { pg0:"pygame.draw"; py0:".поле"; }
+    bonus2:"Bonus()" -> { py0:".поле"; }
+    bonus2:"Bonus.get_rect" -> { pg0:"pygame.Rect()"; py0:".поле"; }
+    ball2:"Ball()" -> { pg0:"pygame.Rect()"; st0:"st (настройки)"; py0:".поле"; }
+    racket2:"Racket()" -> { pg0:"pygame.Rect()"; st0:"st (настройки)"; py0:".поле"; }
+    racket2:"Racket.set_rect" -> { py0:".поле"; }
+    racket2:"Racket.get_rect" -> { py0:".поле"; }
+    menu2:"GameMenu.get_score" -> { py0:".поле"; }
+    menu2:"GameMenu.set_score" -> { py0:".поле"; }
+    menu2:"GameMenu.set_name" -> { py0:".поле"; }
+    db2:"DB.get_hscore" -> { py0:"dict[ключ]"; }
+    db2:"DB.set_hscore" -> { py0:"dict[ключ]"; }
+    lists1:"add_element_last" -> { py0:".copy()"; py0:".append()"; }
+    brickpy1:"brick_rect_by_pos" -> { pg0:"pygame.Rect()"; }
+}
