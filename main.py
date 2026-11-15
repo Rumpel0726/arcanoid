@@ -3,7 +3,7 @@ from Racket import Racket, move_racket
 from Bonus import is_bonus_caught, apply_bonus
 from Ball import Ball
 from Brick import Brick
-from Level import Level, is_level_win, load_levels, make_level_bricks
+from Level import draw_bricks, is_level_win, load_levels, make_level_bricks
 from MainMenu import MainMenu
 from GameMenu import GameMenu
 from RegisterMenu import RegisterMenu
@@ -26,7 +26,6 @@ class Game:
         self.levels = levels_
         self.racket = Racket()
         self.ball = Ball()
-        self.level = Level()
         self.main_menu = MainMenu()
         self.register_menu = RegisterMenu()
         self.pause_menu = PauseMenu()
@@ -61,7 +60,6 @@ class Game:
     def set_game(self):
         self.racket = Racket()
         self.ball = Ball()
-        self.level = Level()
         self.level_bricks = make_level_bricks(self.levels[self.level_num])
         self.brick = Brick()
         self.game_menu = GameMenu(self.level_num + 1, self.score)
@@ -232,7 +230,7 @@ class Game:
                 if is_level_win(self.level_bricks):
                     self.f_run = 'WIN'
                     self.score = self.game_menu.get_score()
-                self.level.draw(self.level_bricks)
+                draw_bricks(self.level_bricks)
                 for i in range(len(self.bonus_list)): # проверка косания с бонусом
                     self.bonus_list[i].draw()
                     self.bonus_list[i].move()

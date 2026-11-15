@@ -2,12 +2,11 @@ from init_glob_vars import *
 from Brick import make_brick
 
 
-class Level():
-    def draw(self, level_bricks):
-        for i in range(len(level_bricks)):
-            if level_bricks[i].get_visible() == 1:
-                level_bricks[i].draw()
-            #print(level_bricks[i].get_visible)
+# Отрисовка целых кирпичей уровня
+def draw_bricks(level_bricks):
+    for i in range(len(level_bricks)):
+        if level_bricks[i].get_visible() == 1:
+            level_bricks[i].draw()
 
 
 # Чтение уровней из файла (один раз при запуске)
